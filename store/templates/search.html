@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Header -->
+<header class="bg-dark py-3">
+    <div class="container px-1 px-lg-2 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-5 fw-bold" style="font-size: 2.5rem;">Search Results</h1>
+        </div>
+    </div>
+</header>
+<br><br>
+<div class="container">
+    <div class="row justify-content-center"> <!-- Center aligns content -->
+        <div class="col-lg-8"> <!-- Adjusted column width for large screens -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3"> <!-- Improved grid layout and reduced gap -->
+                {% if searched %}
+                    {% for product in searched %}
+                        <div class="col mb-4"> <!-- Reduced card margin -->
+                            <div class="card h-100">
+                                <img class="card-img-top" src="{{ product.image.url }}" alt="Product Image" />
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold text-center fs-5">{{ product.name }}</h5> <!-- Reduced card title font size -->
+                                    <p class="card-text text-center">₹{{ product.price }}</p>
+                                </div>
+                                <div class="card-footer bg-transparent border-0">
+                                    <div class="d-grid">
+                                        <a class="btn btn-outline-dark btn-sm" href="{% url 'product' product.id %}">View Product</a> <!-- Reduced button size -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
